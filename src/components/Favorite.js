@@ -64,6 +64,7 @@ const Favorite = ({ article }) => {
   return (
     <button
       onClick={handleFavoriteClick}
+      disabled={handleFavorite.isLoading}
       style={fullStyles}
       className="btn btn-sm btn-outline-primary"
     >

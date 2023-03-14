@@ -1,6 +1,8 @@
 import AuthorInfo from "./AuthorInfo";
 import { useSelector } from "react-redux";
 import Favorite from "./Favorite";
+import FollowArticle from "./FollowArticle";
+
 const ArticleMeta = ({ article }) => {
   const { user } = useSelector((state) => state.auth);
   let isAuthor = false;
@@ -16,11 +18,7 @@ const ArticleMeta = ({ article }) => {
     </>
   ) : (
     <>
-      <button className="btn btn-sm btn-outline-secondary">
-        <i className="ion-plus-round"></i>
-        &nbsp; {`Follow ${article.author.username}`}{" "}
-      </button>
-      &nbsp;&nbsp;
+      <FollowArticle profileData={article.author}></FollowArticle>
       <Favorite article={article} type="fullArticle"></Favorite>
     </>
   );

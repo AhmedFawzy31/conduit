@@ -17,16 +17,12 @@ const ArticleList = ({ articles, handlePaginationClick }) => {
 
   return (
     <>
-      <div className="articleList">
-        {articles.articles.map((article) => {
-          return (
-            <ArticlePreview
-              key={article.slug}
-              article={article}
-            ></ArticlePreview>
-          );
-        })}
-      </div>
+      {articles.articles.map((article) => {
+        return (
+          <ArticlePreview key={article.slug} article={article}></ArticlePreview>
+        );
+      })}
+
       <nav className="pagination-nav">
         <ul className="pagination">{paginationItems}</ul>
       </nav>

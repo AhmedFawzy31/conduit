@@ -3,8 +3,10 @@ import { redirect, useParams } from "react-router-dom";
 import { queryClient } from "../QueryClient";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import ArticleList from "../components/ArticleList";
+import Follow from "../components/Follow";
 const Profile = () => {
   const user = useSelector((state) => state.auth.user);
   const { username } = useParams();
@@ -68,10 +70,17 @@ const Profile = () => {
                   />
                   <h4>{profileData.username}</h4>
                   <p>{profileData.bio}</p>
-                  <button className="btn btn-sm btn-outline-secondary action-btn">
-                    <i className="ion-plus-round"></i>
-                    &nbsp; {`Follow ${profileData.username}`}
-                  </button>
+                  {!isOwnProfile && (
+                    <Follow profileData={profile.profile}></Follow>
+                  )}
+                  {isOwnProfile && (
+                    <Link
+                      to={"/settings"}
+                      className="btn btn-sm btn-outline-secondary action-btn"
+                    >
+                      <i class="ion-gear-a"></i> Edit profile settings
+                    </Link>
+                  )}
                 </div>
               )}
             </div>
@@ -129,7 +138,11 @@ export function loader({ request, params }) {
   const promise = queryClient.prefetchQuery({
     queryKey: [params.username],
     queryFn: async () => {
-      const response = await axios.get(url);
+      const response = await axios.get(url, {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      });
       if (response.status !== 200) {
         throw new Error("Network response was not ok");
       }

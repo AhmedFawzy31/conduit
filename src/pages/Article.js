@@ -16,6 +16,7 @@ const Article = () => {
   const [articleState, setArticleState] = useState({
     favorited: article.favorited,
     favoritesCount: article.favoritesCount,
+    following: article.author.following,
   });
   return (
     <articleContext.Provider value={{ articleState, setArticleState }}>

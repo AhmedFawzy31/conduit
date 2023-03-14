@@ -7,11 +7,15 @@ const TagList = ({ tags, handleTagFiter }) => {
             key={tag}
             onClick={() => handleTagFiter(tag)}
             className="tag-pill tag-default"
+            style={{
+              border: 0,
+              outline: 0,
+            }}
           >
             {tag}
           </button>
         ) : (
-          <li key={tag} className="tag-pill tag-default">
+          <li key={tag} className="tag-pill tag-default tag-outline">
             {tag}
           </li>
         );
