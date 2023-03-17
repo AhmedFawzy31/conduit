@@ -30,7 +30,9 @@ const Comments = ({ slug }) => {
       {comments.isLoading && <div>Loading comments...</div>}
       {comments.data &&
         comments.data.comments.map((comment) => {
-          return <Comment key={comment.id} comment={comment}></Comment>;
+          return (
+            <Comment slug={slug} key={comment.id} comment={comment}></Comment>
+          );
         })}
     </>
   );

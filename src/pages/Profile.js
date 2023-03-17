@@ -1,17 +1,19 @@
 import { useSelector } from "react-redux";
-import { redirect, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { queryClient } from "../QueryClient";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import ArticleList from "../components/ArticleList";
 import Follow from "../components/Follow";
+import { useLoaderData } from "react-router-dom";
 const Profile = () => {
   const user = useSelector((state) => state.auth.user);
   const { username } = useParams();
-  const isOwnProfile = username === user.username;
-  const profile = queryClient.getQueryData([username]);
+  let isOwnProfile = false;
+  if (user) isOwnProfile = username === user.username;
+  const profile = useLoaderData();
   const profileData = {
     username: isOwnProfile ? user.username : profile.profile.username,
     image: isOwnProfile ? user.image : profile.profile.image,
@@ -35,23 +37,35 @@ const Profile = () => {
       return response.data;
     },
   });
+  //reset when new profile is loaded, but only if it's another profile than the current one
+  useEffect(() => {
+    setActivePage(0);
+    setQueryParamaters({
+      type: "author",
+      offset: 0,
+    });
+  }, [profileData.username]);
   const getAuthorArticles = () => {
+    setActivePage(0);
     setQueryParamaters({
       type: "author",
       offset: 0,
     });
   };
   const getFavoritedArticles = () => {
+    setActivePage(0);
     setQueryParamaters({
       type: "favorited",
       offset: 0,
     });
   };
+  const [activePage, setActivePage] = useState(0);
   const handlePaginationClick = (offset) => {
+    setActivePage(offset);
     setQueryParamaters((prevState) => {
       return {
         ...prevState,
-        offset: offset,
+        offset: offset * 10,
       };
     });
   };
@@ -78,7 +92,7 @@ const Profile = () => {
                       to={"/settings"}
                       className="btn btn-sm btn-outline-secondary action-btn"
                     >
-                      <i class="ion-gear-a"></i> Edit profile settings
+                      <i className="ion-gear-a"></i> Edit profile settings
                     </Link>
                   )}
                 </div>
@@ -118,6 +132,7 @@ const Profile = () => {
                 <ArticleList
                   handlePaginationClick={handlePaginationClick}
                   articles={profileArticles.data}
+                  activePage={activePage}
                 ></ArticleList>
               )}
             </div>
@@ -130,19 +145,24 @@ const Profile = () => {
 export default Profile;
 export function loader({ request, params }) {
   const user = JSON.parse(localStorage.getItem("user"));
-  //if not logged in route protection
-  if (!user) return redirect("/auth/login");
+
   // don't waste time fetching if it's the profile of the logged in user
-  if (params.username === user.username) return null;
+  if (user) {
+    if (params.username === user.username) return null;
+  }
   const url = `https://api.realworld.io/api/profiles/${params.username}`;
+  let config = {};
+  if (user) {
+    config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+  }
   const promise = queryClient.prefetchQuery({
     queryKey: [params.username],
     queryFn: async () => {
-      const response = await axios.get(url, {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
+      const response = await axios.get(url, config);
       if (response.status !== 200) {
         throw new Error("Network response was not ok");
       }
@@ -150,9 +170,6 @@ export function loader({ request, params }) {
       return response.data;
     },
   });
-  // return null if data already, don't refetch
-  if (queryClient.getQueryData([params.username])) return null;
-  //return promise if not
   return promise.then(() => {
     return queryClient.getQueryData([params.username]);
   });

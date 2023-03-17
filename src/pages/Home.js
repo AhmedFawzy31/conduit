@@ -5,14 +5,14 @@ import axios from "axios";
 import TagList from "../components/TagList";
 import ArticleList from "../components/ArticleList";
 const Home = () => {
+  const { user } = useSelector((state) => state.auth);
   // to refetch on pagination and tag and user feed
   //https://github.com/TanStack/query/discussions/351
   const [queryParamaters, setParameters] = useState({
     offset: 0,
     tag: null,
-    isFeed: false,
+    isFeed: user ? true : false,
   });
-  const { user } = useSelector((state) => state.auth);
   //conditional auth if logged in
   let requestConfig = {};
   if (user)
@@ -42,15 +42,18 @@ const Home = () => {
       },
     ],
   });
+  const [activePage, setActivePage] = useState(0);
   //set pagination parameter of whatever we're getting, global or feed, with or without tag
   const handlePaginationClick = (offset) => {
+    setActivePage(offset);
     setParameters({
       ...queryParamaters,
-      offset: offset,
+      offset: offset * 10,
     });
   };
   //get global feed not user feed, but with tag
   const handleTagFiter = (tag) => {
+    setActivePage(0);
     setParameters({
       offset: 0,
       tag: tag,
@@ -59,6 +62,7 @@ const Home = () => {
   };
   //to get global feed without any filters when it's clicked
   const resetQuery = () => {
+    setActivePage(0);
     setParameters({
       offset: 0,
       tag: null,
@@ -67,6 +71,7 @@ const Home = () => {
   };
   // get user feed
   const handleFeed = () => {
+    setActivePage(0);
     setParameters({
       offset: 0,
       tag: null,
@@ -99,21 +104,31 @@ const Home = () => {
                 <ul className="nav nav-pills outline-active">
                   {user && (
                     <li className="nav-item">
-                      <button onClick={handleFeed} className="nav-link" href="">
+                      <button
+                        onClick={handleFeed}
+                        className={`nav-link ${
+                          queryParamaters.isFeed ? "active" : ""
+                        }`}
+                      >
                         Your Feed
                       </button>
                     </li>
                   )}
                   <li className="nav-item">
-                    <button onClick={resetQuery} className="nav-link" href="">
+                    <button
+                      onClick={resetQuery}
+                      className={`nav-link ${
+                        queryParamaters.isFeed || queryParamaters.tag
+                          ? ""
+                          : "active"
+                      }`}
+                    >
                       Global
                     </button>
                   </li>
                   {queryParamaters.tag && (
-                    <li className="nav-item">
-                      <button className="nav-link" href="">
-                        {`#${queryParamaters.tag}`}
-                      </button>
+                    <li className={`nav-item`}>
+                      <button className="nav-link active">{`#${queryParamaters.tag}`}</button>
                     </li>
                   )}
                 </ul>
@@ -122,6 +137,7 @@ const Home = () => {
                 <ArticleList
                   articles={articles.data}
                   handlePaginationClick={handlePaginationClick}
+                  activePage={activePage}
                 ></ArticleList>
               )}
             </div>

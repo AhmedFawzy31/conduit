@@ -1,12 +1,17 @@
 import ArticlePreview from "./ArticlePreview";
-const ArticleList = ({ articles, handlePaginationClick }) => {
+const ArticleList = ({ articles, handlePaginationClick, activePage }) => {
   //get number of pages
   let paginationItems = [];
   for (let i = 0; i < articles.articlesCount / 10; i++) {
     paginationItems.push(
-      <li key={i + 1} className="page-item">
+      <li
+        key={i + 1}
+        className={`page-item ${i === activePage ? "active" : ""}`}
+      >
         <button
-          onClick={() => handlePaginationClick(i * 10)}
+          onClick={() => {
+            handlePaginationClick(i);
+          }}
           className="page-link"
         >
           {i + 1}

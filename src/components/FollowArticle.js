@@ -3,15 +3,20 @@ import { useMutation } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { articleContext } from "../pages/Article";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 const Follow = ({ profileData }) => {
+  const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const { articleState, setArticleState } = useContext(articleContext);
   const apiUrl = `https://api.realworld.io/api/profiles/${profileData.username}/follow`;
-  const config = {
-    headers: {
-      Authorization: `Bearer ${user.token}`,
-    },
-  };
+  let config = {};
+  if (user) {
+    config = {
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+      },
+    };
+  }
   const followAction = useMutation({
     mutationFn: async () => {
       let response;
@@ -30,7 +35,8 @@ const Follow = ({ profileData }) => {
     },
   });
   const handleFollowAction = () => {
-    followAction.mutate();
+    if (user) followAction.mutate();
+    else navigate("/auth/login");
   };
   return (
     <button

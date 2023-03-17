@@ -2,6 +2,8 @@ import AuthorInfo from "./AuthorInfo";
 import { useSelector } from "react-redux";
 import Favorite from "./Favorite";
 import FollowArticle from "./FollowArticle";
+import DeleteArticle from "./DeleteArticle";
+import { Link } from "react-router-dom";
 
 const ArticleMeta = ({ article }) => {
   const { user } = useSelector((state) => state.auth);
@@ -9,12 +11,15 @@ const ArticleMeta = ({ article }) => {
   if (user && article.author.username === user.username) isAuthor = true;
   const conditionalContent = isAuthor ? (
     <>
-      <button className="btn btn-sm btn-outline-secondary" type="button">
+      <Link
+        to={`/editor/${article.slug}`}
+        state={article}
+        className="btn btn-sm btn-outline-secondary"
+        type="button"
+      >
         <i className="ion-edit"></i> Edit Article
-      </button>{" "}
-      <button className="btn btn-sm btn-outline-danger" type="button">
-        <i className="ion-trash-a"></i> Delete Article
-      </button>
+      </Link>{" "}
+      <DeleteArticle slug={article.slug}></DeleteArticle>
     </>
   ) : (
     <>

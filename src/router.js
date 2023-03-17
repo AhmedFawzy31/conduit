@@ -6,9 +6,12 @@ import Settings from "./pages/Settings";
 import { checkAuthLoader } from "./pages/Auth";
 import Profile from "./pages/Profile";
 import Article from "./pages/Article";
-import Editor from "./pages/Editor";
+import NewArticle from "./pages/NewArticle";
+import EditArticle from "./pages/EditArticle";
 import { loader as articleLoader } from "./pages/Article";
 import { loader as profileLoader } from "./pages/Profile";
+import { loader as newArticleLoader } from "./pages/NewArticle";
+import { loader as editArticleLoader } from "./pages/EditArticle";
 const router = createBrowserRouter([
   {
     path: "",
@@ -39,12 +42,13 @@ const router = createBrowserRouter([
       },
       {
         path: "editor",
-        element: <Editor></Editor>,
+        element: <NewArticle></NewArticle>,
+        loader: newArticleLoader,
       },
       {
         path: "editor/:slug",
-        element: <Editor></Editor>,
-        loader: () => {},
+        element: <EditArticle></EditArticle>,
+        loader: editArticleLoader,
       },
     ],
   },

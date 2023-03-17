@@ -28,7 +28,7 @@ const Settings = () => {
     dispatch(logout());
     navigate("/");
   };
-  const updateUser = useMutation({
+  const { isSuccess, mutate, data } = useMutation({
     mutationFn: async (data) => {
       const response = await axios.put(
         "https://api.realworld.io/api/user",
@@ -48,16 +48,17 @@ const Settings = () => {
         dataToSend[key] = form[key];
       }
     });
-    updateUser.mutate({
+    mutate({
       user: dataToSend,
     });
   };
   //https://stackoverflow.com/questions/70556785/warning-cannot-update-a-component-x-while-rendering-a-different-y-component-to
   useEffect(() => {
-    if (updateUser.isSuccess) {
-      dispatch(login(updateUser.data.user));
+    if (isSuccess) {
+      navigate(`/profile/${data.user.username}`);
+      dispatch(login(data.user));
     }
-  }, [dispatch, updateUser]);
+  }, [dispatch, isSuccess, data, navigate]);
   return (
     <>
       <div className="settings-page">
