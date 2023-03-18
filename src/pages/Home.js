@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import TagList from "../components/TagList";
 import ArticleList from "../components/ArticleList";
-import { ClipLoader } from "react-spinners";
+import { HashLoader } from "react-spinners";
 const Home = () => {
   const { user } = useSelector((state) => state.auth);
   // to refetch on pagination and tag and user feed
@@ -84,8 +84,11 @@ const Home = () => {
       <div className="home-page">
         <div className="banner">
           <div className="container">
-            <h1 className="logo-font">conduit</h1>
-            <p>A place to share your knowledge.</p>
+            <h1 className="logo-font">Stay Curious.</h1>
+            <p>
+              Discover stories, thinking, and expertise<br></br>from writers on
+              any topic.
+            </p>
           </div>
         </div>
         <div className="container page">
@@ -125,7 +128,7 @@ const Home = () => {
                 </ul>
               </div>
               {articles.isLoading && (
-                <ClipLoader
+                <HashLoader
                   speedMultiplier={2}
                   color="#5cb85c"
                   size={60}
@@ -135,7 +138,7 @@ const Home = () => {
                     position: "relative",
                     top: "100px",
                   }}
-                ></ClipLoader>
+                ></HashLoader>
               )}
               {articles.data && (
                 <ArticleList

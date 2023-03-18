@@ -1,6 +1,10 @@
 button:focus {
   outline: none !important;
 }
+a:focus {
+  outline: 0 !important;
+  text-decoration: none !important;
+}
 #fullScreenLoader {
   position: fixed;
   top: 0;
@@ -17,6 +21,49 @@ button:focus {
   position: relative;
   bottom: 42px;
 }
-nav.navbar {
+nav.navbar,
+footer {
   z-index: 999;
+}
+.sidebar {
+  background-color: #fff !important;
+}
+.sidebar .tag-default {
+  background-color: #fff !important;
+  color: rgba(117, 117, 117, 1) !important;
+  border: 1px solid rgba(230, 230, 230, 1) !important;
+  padding: 6px 16px !important;
+  margin: 0 8px 8px 0 !important;
+  border-radius: 3px !important;
+}
+.sidebar > p {
+  margin-bottom: 16px !important;
+  font-weight: bold;
+}
+.article-meta .info {
+  margin-left: 15px !important;
+}
+.article-preview .preview-link p,
+.article-preview .preview-link span {
+  color: #757575 !important;
+}
+.article-preview .preview-link ul li {
+  background-color: rgba(242, 242, 242, 1) !important;
+  color: rgba(117, 117, 117, 1) !important;
+  border: 0 !important;
+  font-weight: normal !important;
+}
+.home-page .banner {
+  box-shadow: none !important;
+  padding: 6rem;
+  background-color: #b85cb8;
+}
+.home-page .banner p,
+.home-page .banner h1 {
+  text-align: left !important;
+  text-shadow: none !important;
+}
+.home-page .banner h1 {
+  font-size: 4.5rem !important;
+  margin-bottom: 25px;
 }

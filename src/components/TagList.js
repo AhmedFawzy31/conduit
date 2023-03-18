@@ -8,7 +8,6 @@ const TagList = ({ tags, handleTagFiter }) => {
             onClick={() => handleTagFiter(tag)}
             className="tag-pill tag-default"
             style={{
-              border: 0,
               outline: 0,
             }}
           >

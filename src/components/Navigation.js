@@ -10,7 +10,7 @@ const Navigation = () => {
         </NavLink>
         <ul className="nav navbar-nav pull-xs-right">
           <li className="nav-item">
-            <NavLink className="nav-link active" to="/">
+            <NavLink className="nav-link" to="/">
               Home
             </NavLink>
           </li>
