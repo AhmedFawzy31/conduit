@@ -24,14 +24,17 @@ const DeleteArticle = ({ slug }) => {
     mutate();
   };
   useEffect(() => {
-    if (isSuccess) navigate("/");
-  }, [isSuccess, navigate]);
+    if (isSuccess) navigate(`/profile/${user.username}`);
+  }, [isSuccess, navigate, user.username]);
   return (
     <button
       onClick={handleDeleteArticle}
       className="btn btn-sm btn-outline-danger"
       type="button"
       disabled={isLoading}
+      style={{
+        marginLeft: "10px",
+      }}
     >
       <i className="ion-trash-a"></i> Delete Article
     </button>

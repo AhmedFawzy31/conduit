@@ -56,6 +56,7 @@ const Favorite = ({ article }) => {
     handleFavorite.mutate();
   };
   const fullStyles = {
+    marginLeft: "10px",
     opacity: handleFavorite.isLoading ? "0.5" : "0.8",
     backgroundColor: articleState.favorited ? "#5cb85c" : "transparent",
     color: articleState.favorited ? "#fff" : "#5cb85c",

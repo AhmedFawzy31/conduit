@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Comment from "./Comment";
 import { useSelector } from "react-redux";
+import { ClipLoader } from "react-spinners";
 
 const Comments = ({ slug }) => {
   const { user } = useSelector((state) => state.auth);
@@ -21,13 +22,26 @@ const Comments = ({ slug }) => {
         `https://api.realworld.io/api/articles/${slug}/comments`,
         config
       );
-      console.log(response.data);
       return response.data;
     },
   });
   return (
     <>
-      {comments.isLoading && <div>Loading comments...</div>}
+      {comments.isLoading && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "50px",
+          }}
+        >
+          <ClipLoader
+            speedMultiplier={2}
+            color="#5cb85c"
+            size={40}
+          ></ClipLoader>
+        </div>
+      )}
       {comments.data &&
         comments.data.comments.map((comment) => {
           return (

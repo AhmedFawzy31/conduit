@@ -63,6 +63,7 @@ const EditArticle = () => {
                       name="title"
                       value={form.title}
                       onChange={onChange}
+                      disabled={updateArticle.isLoading}
                     />
                   </fieldset>
                   <fieldset className="form-group">
@@ -74,6 +75,7 @@ const EditArticle = () => {
                       value={form.description}
                       onChange={onChange}
                       required
+                      disabled={updateArticle.isLoading}
                     />
                   </fieldset>
                   <fieldset className="form-group">
@@ -85,11 +87,13 @@ const EditArticle = () => {
                       value={form.body}
                       required
                       onChange={onChange}
+                      disabled={updateArticle.isLoading}
                     ></textarea>
                   </fieldset>
                   <button
                     className="btn btn-lg pull-xs-right btn-primary"
                     type="submit"
+                    disabled={updateArticle.isLoading}
                   >
                     Publish Article
                   </button>

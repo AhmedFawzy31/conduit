@@ -26,6 +26,7 @@ const NewComment = ({ user, slug }) => {
     e.preventDefault();
     mutate();
   };
+  //refetch
   useEffect(() => {
     if (isSuccess) queryClient.invalidateQueries({ queryKey: ["comments"] });
   }, [isSuccess]);
@@ -34,6 +35,7 @@ const NewComment = ({ user, slug }) => {
       <div className="card-block">
         <textarea
           required
+          disabled={isLoading}
           onChange={(e) => {
             setCommentText(e.target.value);
           }}

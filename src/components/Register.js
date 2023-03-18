@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-const Register = ({authenticate}) => {
+const Register = ({ authenticate }) => {
   const [formState, setFormState] = useState({
     username: "",
     email: "",
@@ -15,7 +15,7 @@ const Register = ({authenticate}) => {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    authenticate.mutate(formState, "register")
+    authenticate.mutate({ user: formState, action: "register" });
   };
   return (
     <>
@@ -43,6 +43,7 @@ const Register = ({authenticate}) => {
                     type="text"
                     placeholder="Your Name"
                     name="username"
+                    disabled={authenticate.isLoading}
                   />
                 </fieldset>
                 <fieldset className="form-group">
@@ -53,6 +54,7 @@ const Register = ({authenticate}) => {
                     type="text"
                     placeholder="Email"
                     name="email"
+                    disabled={authenticate.isLoading}
                   />
                 </fieldset>
                 <fieldset className="form-group">
@@ -63,9 +65,13 @@ const Register = ({authenticate}) => {
                     type="password"
                     placeholder="Password"
                     name="password"
+                    disabled={authenticate.isLoading}
                   />
                 </fieldset>
-                <button className="btn btn-lg btn-primary pull-xs-right">
+                <button
+                  disabled={authenticate.isLoading}
+                  className="btn btn-lg btn-primary pull-xs-right"
+                >
                   Sign up
                 </button>
               </form>

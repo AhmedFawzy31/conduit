@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import TagList from "../components/TagList";
 import ArticleList from "../components/ArticleList";
+import { ClipLoader } from "react-spinners";
 const Home = () => {
   const { user } = useSelector((state) => state.auth);
   // to refetch on pagination and tag and user feed
@@ -90,16 +91,6 @@ const Home = () => {
         <div className="container page">
           <div className="row">
             <div className="col-md-9">
-              {articles.isLoading && (
-                <p
-                  style={{
-                    position: "absolute",
-                    top: "60px",
-                  }}
-                >
-                  Loading...
-                </p>
-              )}
               <div className="feed-toggle">
                 <ul className="nav nav-pills outline-active">
                   {user && (
@@ -133,6 +124,19 @@ const Home = () => {
                   )}
                 </ul>
               </div>
+              {articles.isLoading && (
+                <ClipLoader
+                  speedMultiplier={2}
+                  color="#5cb85c"
+                  size={60}
+                  cssOverride={{
+                    display: "block",
+                    margin: "auto",
+                    position: "relative",
+                    top: "100px",
+                  }}
+                ></ClipLoader>
+              )}
               {articles.data && (
                 <ArticleList
                   articles={articles.data}
@@ -143,8 +147,15 @@ const Home = () => {
             </div>
 
             <div className="col-md-3">
-              <div className="sidebar">
+              <div
+                style={{
+                  position: "relative",
+                  minHeight: "155px",
+                }}
+                className="sidebar d-flex flex-column justify-content-center align-items-center"
+              >
                 <p>Popular Tags</p>
+
                 {tags.data && (
                   <TagList
                     tags={tags.data.tags}

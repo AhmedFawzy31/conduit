@@ -8,6 +8,8 @@ import Comments from "../components/Comments";
 import { useSelector } from "react-redux";
 import NewComment from "../components/NewComment";
 import { useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
+
 export const articleContext = React.createContext();
 const Article = () => {
   const user = useSelector((state) => state.auth.user);
@@ -47,6 +49,13 @@ const Article = () => {
             <div className="col-xs-12 col-md-8 offset-md-2">
               {user && (
                 <NewComment slug={article.slug} user={user}></NewComment>
+              )}
+              {!user && (
+                <p>
+                  <Link to="/auth/login">Sign in</Link> or{" "}
+                  <Link to="/auth/register">Sign up</Link> to add comments on
+                  this article.
+                </p>
               )}
               <Comments slug={slug}></Comments>
             </div>

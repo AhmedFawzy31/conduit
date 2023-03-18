@@ -55,6 +55,7 @@ const CreateEditArticle = () => {
                     <input
                       type="text"
                       required
+                      disabled={createArticle.isLoading}
                       className="form-control form-control-lg"
                       placeholder="Article Title"
                       name="title"
@@ -71,6 +72,7 @@ const CreateEditArticle = () => {
                       value={form.description}
                       onChange={onChange}
                       required
+                      disabled={createArticle.isLoading}
                     />
                   </fieldset>
                   <fieldset className="form-group">
@@ -82,6 +84,7 @@ const CreateEditArticle = () => {
                       value={form.body}
                       required
                       onChange={onChange}
+                      disabled={createArticle.isLoading}
                     ></textarea>
                   </fieldset>
                   <fieldset className="form-group">
@@ -91,12 +94,14 @@ const CreateEditArticle = () => {
                       placeholder="Enter tags seperated by a space"
                       name="tagList"
                       onChange={onChange}
+                      disabled={createArticle.isLoading}
                     />
                     <div className="tag-list"></div>
                   </fieldset>
                   <button
                     className="btn btn-lg pull-xs-right btn-primary"
                     type="submit"
+                    disabled={createArticle.isLoading}
                   >
                     Publish Article
                   </button>

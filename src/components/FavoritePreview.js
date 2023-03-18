@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { queryClient } from "../QueryClient";
 const Favorite = ({ type, article }) => {
   const [previewState, setPreviewState] = useState({
     favorited: article.favorited,
@@ -52,6 +53,15 @@ const Favorite = ({ type, article }) => {
   const handleFavorite = useMutation({
     mutationFn: previewState.favorited ? unfavorite : favorite,
   });
+  //refetch, useful when in profile and user unfavorites
+  useEffect(() => {
+    if (user) {
+      if (handleFavorite.isSuccess)
+        queryClient.invalidateQueries({
+          queryKey: [`${user.username}Articles`],
+        });
+    }
+  }, [handleFavorite.isSuccess, user]);
   const handleFavoriteClick = () => {
     //should it be returned?
     if (!user) return navigate("/auth/login");

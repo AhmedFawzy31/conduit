@@ -8,6 +8,7 @@ import axios from "axios";
 import ArticleList from "../components/ArticleList";
 import Follow from "../components/Follow";
 import { useLoaderData } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 const Profile = () => {
   const user = useSelector((state) => state.auth.user);
   const { username } = useParams();
@@ -33,7 +34,6 @@ const Profile = () => {
         `https://api.realworld.io/api/articles?${queryParamaters.type}=${profileData.username}&offset=${queryParamaters.offset}`,
         requestConfig
       );
-      console.log(response.data);
       return response.data;
     },
   });
@@ -128,6 +128,19 @@ const Profile = () => {
                   </li>
                 </ul>
               </div>
+              {profileArticles.isLoading && (
+                <ClipLoader
+                  speedMultiplier={2}
+                  color="#5cb85c"
+                  size={60}
+                  cssOverride={{
+                    display: "block",
+                    margin: "auto",
+                    position: "relative",
+                    top: "100px",
+                  }}
+                ></ClipLoader>
+              )}
               {profileArticles.data && (
                 <ArticleList
                   handlePaginationClick={handlePaginationClick}
@@ -166,7 +179,6 @@ export function loader({ request, params }) {
       if (response.status !== 200) {
         throw new Error("Network response was not ok");
       }
-      console.log(response.data);
       return response.data;
     },
   });

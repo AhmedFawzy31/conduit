@@ -1,5 +1,7 @@
 import ArticlePreview from "./ArticlePreview";
+
 const ArticleList = ({ articles, handlePaginationClick, activePage }) => {
+  const isZero = articles.articles.length === 0;
   //get number of pages
   let paginationItems = [];
   for (let i = 0; i < articles.articlesCount / 10; i++) {
@@ -27,7 +29,9 @@ const ArticleList = ({ articles, handlePaginationClick, activePage }) => {
           <ArticlePreview key={article.slug} article={article}></ArticlePreview>
         );
       })}
-
+      {isZero && (
+        <div className="article-preview">No articles are here... yet.</div>
+      )}
       <nav className="pagination-nav">
         <ul className="pagination">{paginationItems}</ul>
       </nav>

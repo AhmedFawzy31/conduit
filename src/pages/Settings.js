@@ -28,7 +28,7 @@ const Settings = () => {
     dispatch(logout());
     navigate("/");
   };
-  const { isSuccess, mutate, data } = useMutation({
+  const { isSuccess, mutate, data, isLoading } = useMutation({
     mutationFn: async (data) => {
       const response = await axios.put(
         "https://api.realworld.io/api/user",
@@ -77,6 +77,7 @@ const Settings = () => {
                       type="text"
                       name="image"
                       placeholder="URL of profile picture"
+                      disabled={isLoading}
                     />
                   </fieldset>
                   <fieldset className="form-group">
@@ -87,6 +88,7 @@ const Settings = () => {
                       type="text"
                       placeholder="Your Name"
                       name="username"
+                      disabled={isLoading}
                     />
                   </fieldset>
                   <fieldset className="form-group">
@@ -97,6 +99,7 @@ const Settings = () => {
                       placeholder="Short bio about you"
                       name="bio"
                       value={form.bio}
+                      disabled={isLoading}
                     ></textarea>
                   </fieldset>
                   <fieldset className="form-group">
@@ -107,6 +110,7 @@ const Settings = () => {
                       type="text"
                       placeholder="Email"
                       name="email"
+                      disabled={isLoading}
                     />
                   </fieldset>
                   <fieldset className="form-group">
@@ -117,9 +121,13 @@ const Settings = () => {
                       type="password"
                       placeholder="Password"
                       name="password"
+                      disabled={isLoading}
                     />
                   </fieldset>
-                  <button className="btn btn-lg btn-primary pull-xs-right">
+                  <button
+                    disabled={isLoading}
+                    className="btn btn-lg btn-primary pull-xs-right"
+                  >
                     Update Settings
                   </button>
                 </fieldset>
@@ -128,6 +136,7 @@ const Settings = () => {
               <button
                 onClick={logoutHandler}
                 className="btn btn-outline-danger"
+                disabled={isLoading}
               >
                 Or click here to logout.
               </button>

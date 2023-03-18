@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { queryClient } from "../QueryClient";
 import axios from "axios";
+import { ClipLoader } from "react-spinners";
 
 const Comment = ({ comment, slug }) => {
   const { user } = useSelector((state) => state.auth);
@@ -50,7 +51,8 @@ const Comment = ({ comment, slug }) => {
         <span className="date-posted">{formatDate(comment.createdAt)}</span>
         {isAuthor && (
           <span onClick={handleCommentDelete} className="mod-options">
-            <i className="ion-trash-a"></i>
+            {!isLoading && <i className="ion-trash-a"></i>}
+            {isLoading && <ClipLoader size={20} color={"#b85c5c"}></ClipLoader>}
           </span>
         )}
       </div>
