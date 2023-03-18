@@ -4,7 +4,11 @@ import formatDate from "../helpers/convertData";
 
 const AuthorInfo = ({ article }) => {
   return (
-    <>
+    <div
+      style={{
+        display: "flex",
+      }}
+    >
       <Link to={`/profile/${article.author.username}`}>
         <img alt="author" src={article.author.image} />
       </Link>
@@ -14,7 +18,7 @@ const AuthorInfo = ({ article }) => {
         </Link>
         <span className="date">{formatDate(article.createdAt)}</span>
       </div>
-    </>
+    </div>
   );
 };
 

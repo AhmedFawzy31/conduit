@@ -129,17 +129,22 @@ const Profile = () => {
                 </ul>
               </div>
               {profileArticles.isLoading && (
-                <ClipLoader
-                  speedMultiplier={2}
-                  color="#5cb85c"
-                  size={60}
-                  cssOverride={{
-                    display: "block",
-                    margin: "auto",
-                    position: "relative",
-                    top: "100px",
+                <div
+                  style={{
+                    paddingTop: "50px",
                   }}
-                ></ClipLoader>
+                  className="article-preview"
+                >
+                  <ClipLoader
+                    speedMultiplier={2}
+                    color="#5cb85c"
+                    size={60}
+                    cssOverride={{
+                      display: "block",
+                      margin: "auto",
+                    }}
+                  ></ClipLoader>
+                </div>
               )}
               {profileArticles.data && (
                 <ArticleList

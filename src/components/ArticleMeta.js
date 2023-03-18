@@ -10,7 +10,7 @@ const ArticleMeta = ({ article }) => {
   let isAuthor = false;
   if (user && article.author.username === user.username) isAuthor = true;
   const conditionalContent = isAuthor ? (
-    <>
+    <div>
       <Link
         to={`/editor/${article.slug}`}
         state={article}
@@ -20,12 +20,12 @@ const ArticleMeta = ({ article }) => {
         <i className="ion-edit"></i> Edit Article
       </Link>{" "}
       <DeleteArticle slug={article.slug}></DeleteArticle>
-    </>
+    </div>
   ) : (
-    <>
+    <div>
       <FollowArticle profileData={article.author}></FollowArticle>
       <Favorite article={article} type="fullArticle"></Favorite>
-    </>
+    </div>
   );
   return (
     <div className="article-meta">

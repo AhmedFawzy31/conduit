@@ -55,7 +55,7 @@ footer {
 }
 .home-page .banner {
   box-shadow: none !important;
-  padding: 6rem;
+  /* padding: 6rem; */
   background-color: #b85cb8;
 }
 .home-page .banner p,
@@ -64,6 +64,80 @@ footer {
   text-shadow: none !important;
 }
 .home-page .banner h1 {
-  font-size: 4.5rem !important;
+  /* font-size: 4.5rem !important; */
   margin-bottom: 25px;
+}
+.logo-font {
+  font-family: titillium web, sans-serif !important;
+}
+
+* {
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
+}
+
+*:focus {
+  outline: none !important;
+}
+.toggleButton,
+.toggle {
+  display: none;
+}
+@media (max-width: 767px) {
+  .col-md-9 {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+  .nav {
+    font-size: 15px !important;
+  }
+  .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  .navbar {
+    padding: 10px 0 !important;
+  }
+  .navbar .navbar-brand {
+    margin: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  .article-preview .preview-link ul {
+    max-width: 100% !important;
+  }
+  .navbar-nav .nav-item {
+    margin-left: 0 !important;
+    margin-bottom: 10px !important;
+  }
+  .navbar-brand {
+    margin-bottom: 10px !important;
+  }
+  .toggleButton,
+  .toggle {
+    display: flex;
+  }
+  .lgNav {
+    display: none;
+  }
+  .mobileNavContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .profile-page .user-info .action-btn {
+    float: none !important;
+    margin-top: 15px;
+  }
+}
+.article-meta {
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 599px) {
+  .article-meta {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
 }

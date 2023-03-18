@@ -128,17 +128,22 @@ const Home = () => {
                 </ul>
               </div>
               {articles.isLoading && (
-                <HashLoader
-                  speedMultiplier={2}
-                  color="#5cb85c"
-                  size={60}
-                  cssOverride={{
-                    display: "block",
-                    margin: "auto",
-                    position: "relative",
-                    top: "100px",
+                <div
+                  style={{
+                    paddingTop: "50px",
                   }}
-                ></HashLoader>
+                  className="article-preview"
+                >
+                  <HashLoader
+                    speedMultiplier={2}
+                    color="#5cb85c"
+                    size={60}
+                    cssOverride={{
+                      display: "block",
+                      margin: "auto",
+                    }}
+                  ></HashLoader>
+                </div>
               )}
               {articles.data && (
                 <ArticleList
@@ -155,7 +160,7 @@ const Home = () => {
                   position: "relative",
                   minHeight: "155px",
                 }}
-                className="sidebar d-flex flex-column justify-content-center align-items-center"
+                className="sidebar"
               >
                 <p>Popular Tags</p>
 
