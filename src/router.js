@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Root from "./pages/Root";
 import Auth from "./pages/Auth";
@@ -12,9 +12,9 @@ import { loader as articleLoader } from "./pages/Article";
 import { loader as profileLoader } from "./pages/Profile";
 import { loader as newArticleLoader } from "./pages/NewArticle";
 import { loader as editArticleLoader } from "./pages/EditArticle";
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
-    path: "",
+    path: "/",
     element: <Root></Root>,
     children: [
       {

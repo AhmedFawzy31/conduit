@@ -21,6 +21,7 @@ const Favorite = ({ article }) => {
     if (response.data) {
       setArticleState((prevState) => {
         return {
+          ...prevState,
           favorited: !prevState.favorited,
           favoritesCount: response.data.article.favoritesCount,
         };
@@ -40,6 +41,7 @@ const Favorite = ({ article }) => {
     if (response.data) {
       setArticleState((prevState) => {
         return {
+          ...prevState,
           favorited: !prevState.favorited,
           favoritesCount: response.data.article.favoritesCount,
         };

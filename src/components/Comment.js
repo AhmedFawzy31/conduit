@@ -37,7 +37,10 @@ const Comment = ({ comment, slug }) => {
         <p className="card-text">{comment.body}</p>
       </div>
       <div className="card-footer">
-        <Link to="" className="comment-author">
+        <Link
+          to={`/profile/${comment.author.username}`}
+          className="comment-author"
+        >
           <img
             alt="comment author"
             src={comment.author.image}
@@ -45,7 +48,10 @@ const Comment = ({ comment, slug }) => {
           />
         </Link>
         &nbsp;
-        <Link to="" className="comment-author">
+        <Link
+          to={`/profile/${comment.author.username}`}
+          className="comment-author"
+        >
           {comment.author.username}
         </Link>
         <span className="date-posted">{formatDate(comment.createdAt)}</span>
