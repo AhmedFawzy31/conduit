@@ -24,7 +24,7 @@ const Login = ({ authenticate }) => {
             <div className="col-md-6 offset-md-3 col-xs-12">
               <h1 className="text-xs-center">Sign in</h1>
               <p className="text-xs-center">
-                <Link to="/register">Need an account?</Link>
+                <Link to="/auth/register">Need an account?</Link>
               </p>
 
               {authenticate.isError && (
