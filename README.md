@@ -18,7 +18,7 @@ To get the frontend running locally:
 
 ## Functionality overview
 
-The example application is a social blogging site (i.e. a Medium.com clone) called "Conduit". It uses a custom API for all requests, including authentication. You can view a live demo over at [https://realworldapp.netlify.app/#/)
+The example application is a social blogging site (i.e. a Medium.com clone) called "Conduit". It uses a custom API for all requests, including authentication. You can view a live demo over at (https://realworldapp.netlify.app/#/)[https://realworldapp.netlify.app/#/)
 
 **General functionality:**
 
