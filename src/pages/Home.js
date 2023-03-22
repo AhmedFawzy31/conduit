@@ -12,7 +12,7 @@ const Home = () => {
   const [queryParamaters, setParameters] = useState({
     offset: 0,
     tag: null,
-    isFeed: user ? true : false,
+    isFeed: false,
   });
   //conditional auth if logged in
   let requestConfig = {};
@@ -98,18 +98,6 @@ const Home = () => {
             <div className="col-md-9">
               <div className="feed-toggle">
                 <ul className="nav nav-pills outline-active">
-                  {user && (
-                    <li className="nav-item">
-                      <button
-                        onClick={handleFeed}
-                        className={`nav-link ${
-                          queryParamaters.isFeed ? "active" : ""
-                        }`}
-                      >
-                        Your Feed
-                      </button>
-                    </li>
-                  )}
                   <li className="nav-item">
                     <button
                       onClick={resetQuery}
@@ -119,9 +107,21 @@ const Home = () => {
                           : "active"
                       }`}
                     >
-                      Global
+                      Global Feed
                     </button>
                   </li>
+                  {user && (
+                    <li className="nav-item">
+                      <button
+                        onClick={handleFeed}
+                        className={`nav-link ${
+                          queryParamaters.isFeed ? "active" : ""
+                        }`}
+                      >
+                        Following
+                      </button>
+                    </li>
+                  )}
                   {queryParamaters.tag && (
                     <li className={`nav-item`}>
                       <button className="nav-link active">{`#${queryParamaters.tag}`}</button>
