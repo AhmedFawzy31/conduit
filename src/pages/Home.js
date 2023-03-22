@@ -24,7 +24,7 @@ const Home = () => {
         queryKey: ["articles", queryParamaters],
         queryFn: async () => {
           const response = await axios.get(
-            `https://api.realworld.io/api/articles${
+            `https://conduit-api-ityi.onrender.com/api/articles${
               queryParamaters.isFeed ? "/feed" : ""
             }?offset=${queryParamaters.offset}${
               queryParamaters.tag ? "&tag=" + queryParamaters.tag : ""
@@ -37,7 +37,9 @@ const Home = () => {
       {
         queryKey: ["tags"],
         queryFn: async () => {
-          const response = await axios.get(`https://api.realworld.io/api/tags`);
+          const response = await axios.get(
+            `https://conduit-api-ityi.onrender.com/api/tags`
+          );
           return response.data;
         },
       },

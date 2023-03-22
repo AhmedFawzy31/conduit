@@ -8,7 +8,7 @@ const Follow = ({ profileData }) => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   const { articleState, setArticleState } = useContext(articleContext);
-  const apiUrl = `https://api.realworld.io/api/profiles/${profileData.username}/follow`;
+  const apiUrl = `https://conduit-api-ityi.onrender.com/api/profiles/${profileData.username}/follow`;
   let config = {};
   if (user) {
     config = {

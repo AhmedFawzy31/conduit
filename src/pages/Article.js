@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import NewComment from "../components/NewComment";
 import { useLoaderData } from "react-router-dom";
 import { Link } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
 
 export const articleContext = React.createContext();
 const Article = () => {
@@ -35,7 +36,7 @@ const Article = () => {
         <div className="container page">
           <div className="row article-content">
             <div className="col-md-12">
-              <p>{article.body}</p>
+              <ReactMarkdown children={article.body}></ReactMarkdown>
             </div>
           </div>
           <TagList tags={article.tagList}></TagList>
@@ -68,7 +69,7 @@ const Article = () => {
 export default Article;
 export function loader({ request, params }) {
   const user = JSON.parse(localStorage.getItem("user"));
-  const url = `https://api.realworld.io/api/articles/${params.slug}`;
+  const url = `https://conduit-api-ityi.onrender.com/api/articles/${params.slug}`;
   const promise = queryClient.prefetchQuery({
     queryKey: [params.slug],
     queryFn: async () => {

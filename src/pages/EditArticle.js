@@ -28,7 +28,7 @@ const EditArticle = () => {
   const updateArticle = useMutation({
     mutationFn: async (data) => {
       const response = await axios.put(
-        `https://api.realworld.io/api/articles/${slug}`,
+        `https://conduit-api-ityi.onrender.com/api/articles/${slug}`,
         data,
         {
           headers: { Authorization: `Bearer ${user.token}` },
@@ -110,7 +110,7 @@ export default EditArticle;
 export function loader({ request, params }) {
   const user = JSON.parse(localStorage.getItem("user"));
   if (!user) return redirect("/auth/login");
-  const url = `https://api.realworld.io/api/articles/${params.slug}`;
+  const url = `https://conduit-api-ityi.onrender.com/api/articles/${params.slug}`;
   const promise = queryClient.prefetchQuery({
     queryKey: [params.slug],
     queryFn: async () => {

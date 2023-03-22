@@ -10,7 +10,7 @@ import { login } from "../features/auth/authSlice";
 const Auth = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const API_URL = "https://api.realworld.io/api/users";
+  const API_URL = "https://conduit-api-ityi.onrender.com/api/users";
   const authenticate = useMutation({
     mutationFn: async ({ user, action }) => {
       const isRegister = action === "register";

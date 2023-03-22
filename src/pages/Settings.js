@@ -29,9 +29,10 @@ const Settings = () => {
     navigate("/");
   };
   const { isSuccess, mutate, data, isLoading } = useMutation({
+    mutationKey: "updateUser",
     mutationFn: async (data) => {
       const response = await axios.put(
-        "https://api.realworld.io/api/user",
+        "https://conduit-api-ityi.onrender.com/api/user",
         data,
         {
           headers: { Authorization: `Bearer ${user.token}` },
@@ -47,6 +48,9 @@ const Settings = () => {
       if (form[key] !== null && form[key] !== "") {
         dataToSend[key] = form[key];
       }
+    });
+    console.log({
+      user: dataToSend,
     });
     mutate({
       user: dataToSend,

@@ -19,7 +19,7 @@ const Comments = ({ slug }) => {
     queryKey: ["comments"],
     queryFn: async () => {
       const response = await axios.get(
-        `https://api.realworld.io/api/articles/${slug}/comments`,
+        `https://conduit-api-ityi.onrender.com/api/articles/${slug}/comments`,
         config
       );
       return response.data;

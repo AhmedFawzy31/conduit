@@ -23,7 +23,7 @@ const CreateEditArticle = () => {
   const createArticle = useMutation({
     mutationFn: async (data) => {
       const response = await axios.post(
-        `https://api.realworld.io/api/articles`,
+        `https://conduit-api-ityi.onrender.com/api/articles`,
         data,
         {
           headers: { Authorization: `Bearer ${user.token}` },

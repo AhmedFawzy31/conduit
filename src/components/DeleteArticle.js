@@ -10,7 +10,7 @@ const DeleteArticle = ({ slug }) => {
   const { isLoading, isSuccess, mutate } = useMutation({
     mutationFn: async () => {
       const response = axios.delete(
-        `https://api.realworld.io/api/articles/${slug}`,
+        `https://conduit-api-ityi.onrender.com/api/articles/${slug}`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,

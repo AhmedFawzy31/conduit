@@ -13,7 +13,7 @@ const Favorite = ({ type, article }) => {
   const navigate = useNavigate();
   const favorite = async () => {
     const response = await axios.post(
-      `https://api.realworld.io/api/articles/${article.slug}/favorite`,
+      `https://conduit-api-ityi.onrender.com/api/articles/${article.slug}/favorite`,
       { data: {} },
       {
         headers: {
@@ -33,7 +33,7 @@ const Favorite = ({ type, article }) => {
   };
   const unfavorite = async () => {
     const response = await axios.delete(
-      `https://api.realworld.io/api/articles/${article.slug}/favorite`,
+      `https://conduit-api-ityi.onrender.com/api/articles/${article.slug}/favorite`,
       {
         headers: {
           Authorization: `Bearer ${user.token}`,

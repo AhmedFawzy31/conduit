@@ -14,7 +14,7 @@ const Comment = ({ comment, slug }) => {
   const { isSuccess, mutate, isLoading } = useMutation({
     mutationFn: async () => {
       const response = await axios.delete(
-        `https://api.realworld.io/api/articles/${slug}/comments/${comment.id}`,
+        `https://conduit-api-ityi.onrender.com/api/articles/${slug}/comments/${comment.id}`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
