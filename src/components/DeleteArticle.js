@@ -10,7 +10,7 @@ const DeleteArticle = ({ slug }) => {
   const { isLoading, isSuccess, mutate } = useMutation({
     mutationFn: async () => {
       const response = axios.delete(
-        `https://conduit-api-ityi.onrender.com/api/articles/${slug}`,
+        `${process.env.REACT_APP_API_URL}/api/articles/${slug}`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,

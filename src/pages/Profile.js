@@ -31,7 +31,7 @@ const Profile = () => {
     queryKey: [`${profileData.username}Articles`, queryParamaters],
     queryFn: async () => {
       const response = await axios.get(
-        `https://conduit-api-ityi.onrender.com/api/articles?${queryParamaters.type}=${profileData.username}&offset=${queryParamaters.offset}`,
+        `${process.env.REACT_APP_API_URL}/api/articles?${queryParamaters.type}=${profileData.username}&offset=${queryParamaters.offset}`,
         requestConfig
       );
       return response.data;
@@ -168,7 +168,7 @@ export function loader({ request, params }) {
   if (user) {
     if (params.username === user.username) return null;
   }
-  const url = `https://conduit-api-ityi.onrender.com/api/profiles/${params.username}`;
+  const url = `${process.env.REACT_APP_API_URL}/api/profiles/${params.username}`;
   let config = {};
   if (user) {
     config = {

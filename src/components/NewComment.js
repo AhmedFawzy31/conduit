@@ -7,7 +7,7 @@ const NewComment = ({ user, slug }) => {
   const { isSuccess, mutate, isLoading } = useMutation({
     mutationFn: async () => {
       const response = await axios.post(
-        `https://conduit-api-ityi.onrender.com/api/articles/${slug}/comments`,
+        `${process.env.REACT_APP_API_URL}/api/articles/${slug}/comments`,
         {
           comment: {
             body: commentText,

@@ -32,7 +32,7 @@ const Settings = () => {
     mutationKey: "updateUser",
     mutationFn: async (data) => {
       const response = await axios.put(
-        "https://conduit-api-ityi.onrender.com/api/user",
+        `${process.env.REACT_APP_API_URL}/api/user`,
         data,
         {
           headers: { Authorization: `Bearer ${user.token}` },

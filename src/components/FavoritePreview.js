@@ -13,7 +13,7 @@ const Favorite = ({ type, article }) => {
   const navigate = useNavigate();
   const favorite = async () => {
     const response = await axios.post(
-      `https://conduit-api-ityi.onrender.com/api/articles/${article.slug}/favorite`,
+      `${process.env.REACT_APP_API_URL}/api/articles/${article.slug}/favorite`,
       { data: {} },
       {
         headers: {
@@ -33,7 +33,7 @@ const Favorite = ({ type, article }) => {
   };
   const unfavorite = async () => {
     const response = await axios.delete(
-      `https://conduit-api-ityi.onrender.com/api/articles/${article.slug}/favorite`,
+      `${process.env.REACT_APP_API_URL}/api/articles/${article.slug}/favorite`,
       {
         headers: {
           Authorization: `Bearer ${user.token}`,

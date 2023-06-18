@@ -69,7 +69,7 @@ const Article = () => {
 export default Article;
 export function loader({ request, params }) {
   const user = JSON.parse(localStorage.getItem("user"));
-  const url = `https://conduit-api-ityi.onrender.com/api/articles/${params.slug}`;
+  const url = `${process.env.REACT_APP_API_URL}/api/articles/${params.slug}`;
   const promise = queryClient.prefetchQuery({
     queryKey: [params.slug],
     queryFn: async () => {

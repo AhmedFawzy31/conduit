@@ -24,7 +24,7 @@ const Home = () => {
         queryKey: ["articles", queryParamaters],
         queryFn: async () => {
           const response = await axios.get(
-            `https://conduit-api-ityi.onrender.com/api/articles${
+            `${process.env.REACT_APP_API_URL}/api/articles${
               queryParamaters.isFeed ? "/feed" : ""
             }?offset=${queryParamaters.offset}${
               queryParamaters.tag ? "&tag=" + queryParamaters.tag : ""
@@ -38,7 +38,7 @@ const Home = () => {
         queryKey: ["tags"],
         queryFn: async () => {
           const response = await axios.get(
-            `https://conduit-api-ityi.onrender.com/api/tags`
+            `${process.env.REACT_APP_API_URL}/api/tags`
           );
           return response.data;
         },
